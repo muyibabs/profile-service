@@ -15,24 +15,24 @@ public class ProfileController {
     @Autowired
     CustomerService customerService;
 
-    @PostMapping(value = "/profile")
+    @PostMapping(value = "/customers")
     @PreAuthorize("hasAuthority('create_profile')")
     public Customer save(@RequestBody Customer customer){
         return  customerService.save(customer);
     }
 
-    @GetMapping(value = "/profile/{id}")
+    @GetMapping(value = "/customers/{id}")
     public Customer getById(@PathVariable Integer id){
         return customerService.getById(id);
     }
 
-    @GetMapping(value = "/profile")
-    @PreAuthorize("hasRole('ROLE_operator')") //Only user with this role can access
+    @GetMapping(value = "/customers")
+    @PreAuthorize("hasRole('ROLE_admin')") //Only user with this role can access
     public List<Customer> getAllCustomers(){
         return customerService.getAll();
     }
 
-    @GetMapping(value = "/profilex")
+    @GetMapping(value = "/customersx")
     @PreAuthorize("hasAuthority('read_profile')")
     public CustomerList getAllCustomersAsOne(){
         List<Customer> all = customerService.getAll();
